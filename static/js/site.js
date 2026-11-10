@@ -138,7 +138,8 @@
 
   // Word labels in two rows. Label width estimate at 11 px: Hangul ~11 px, other characters ~6.5 px,
   // plus padding. Each label goes to the row with more room; a label that would still touch its
-  // neighbour in that row is set in a smaller font (down to 80 %).
+  // neighbour in that row is set in a smaller font (down to 80 %) and, if that is not enough,
+  // moved right just past the neighbour instead of overlapping it.
   const FONT = 11;
   const labelWidth = (s, px) => Array.from(s).reduce((a, c) => a + (/[가-힣]/.test(c) ? px : px * 0.6), 0) + 4;
   function wordStrip(words, dur, widthPx) {
@@ -154,13 +155,35 @@
         half = labelWidth(w.w, px) / 2;
       }
       rowEnd[row] = center + half;
+      const st = {};
+      if (px < FONT) st.fontSize = px.toFixed(1) + "px";
       strip.append(h("div", {
         class: "wd" + (w.hl ? " hl-" + w.hl : ""),
         style: { left: (w.t0 / dur) * 100 + "%", width: ((w.t1 - w.t0) / dur) * 100 + "%", top: row * 19 + "px" },
         title: w.w + (w.rr ? " (" + w.rr + ")" : "") + "  " + w.t0.toFixed(2) + "–" + w.t1.toFixed(2) + " s",
-      }, h("span", { class: "ko", style: px < FONT ? { fontSize: px.toFixed(1) + "px" } : null }, w.w)));
+      }, h("span", { class: "ko", style: st }, w.w)));
     });
+    requestAnimationFrame(() => separateLabels(strip));
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(() => separateLabels(strip)));
     return strip;
+  }
+  // After layout: in each row, move a label right until it clears the previous one (measured widths).
+  function separateLabels(strip) {
+    const rows = {};
+    strip.querySelectorAll(".wd span").forEach((s) => {
+      s.style.transform = "";  // measure from the centered position
+      const top = s.parentElement.style.top;
+      (rows[top] = rows[top] || []).push(s);
+    });
+    for (const spans of Object.values(rows)) {
+      let prevRight = -Infinity;
+      spans.map((s) => [s, s.getBoundingClientRect()]).sort((a, b) => a[1].left - b[1].left).forEach(([s, r]) => {
+        if (!r.width) return;
+        const dx = Math.max(0, prevRight + 3 - r.left);
+        if (dx > 0) s.style.transform = "translateX(calc(-50% + " + dx.toFixed(1) + "px))";
+        prevRight = r.right + dx;
+      });
+    }
   }
 
   function specFigure(rec, audio, opt) {
@@ -469,7 +492,7 @@
     recs.forEach((rec) => {
       problem.append(h("div", { class: "rec" }, recMeta(rec, who(rec, kind)),
         field("transcription", rec.text.transcription, rec.highlights, rec.meaning_en),
-        listenBlock(rec, problemBoxes(rec), null)));
+        listenBlock(rec, problemBoxes(rec), spokenWords(rec))));
     });
 
     const process = h("li", { class: "step" }, h("h4", null, "Process: slots, hypotheses, scores"));
@@ -513,7 +536,7 @@
       if (!rec) continue;
       box.append(h("div", { class: "rec" }, recMeta(rec, lab),
         field("transcription", rec.text.transcription, rec.highlights.filter(keep), rec.meaning_en),
-        listenBlock(rec, problemBoxes(rec, keep), null)));
+        listenBlock(rec, problemBoxes(rec, keep), spokenWords(rec))));
     }
   }
 
