@@ -11,7 +11,7 @@ window.KOFLEURS_CONFIG = {
   reviewMode: false,
 
   bibtex: {
-    booktitle: "TODO",  // not in the paper PDF
+    booktitle: "",      // proceedings name: not in the paper PDF; the line is left out while empty
     year: "2027",       // from the venue name ICEIC 2027 (not in the paper PDF)
   },
 };

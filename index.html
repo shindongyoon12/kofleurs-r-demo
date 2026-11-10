@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>KoFLEURS-R Demo</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Audio examples and results for KoFLEURS-R: Improving Text and Audio Consistency in the Korean FLEURS-R Corpus.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%231d2733%22/%3E%3Cpath d=%22M6 22V10m4 12V6m4 16V12m4 10V8m4 14V14m4 8V11%22 stroke=%22white%22 stroke-width=%222.4%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -244,7 +243,7 @@
     <h3>Data and models</h3>
     <ul>
       <li data-nonpaper="sources and licenses">Audio and transcriptions: FLEURS-R [7], derived from FLEURS [6]; both CC BY 4.0. The English sentences under the examples are the FLEURS en_us sentences with the same id (CC BY 4.0).</li>
-      <li data-nonpaper="sources and licenses">Models: Whisper large-v3 and large-v3-turbo [9] and a Korean wav2vec 2.0 model give the recognition hypotheses; a CTC forced aligner gives the CTC likelihood and the word boundaries shown under the spectrograms. Checkpoints: <span data-pdf="FN3-1"><code>kresnik/wav2vec2-large-xlsr-korean</code> and <code>MahmoudAshraf/mms-300m-1130-forced-aligner</code> on Hugging Face.</span> The forced-aligner model is licensed CC BY-NC 4.0.</li>
+      <li data-nonpaper="sources and licenses">Models: Whisper large-v3 and large-v3-turbo [9] and a Korean wav2vec 2.0 model give the recognition hypotheses; a CTC forced aligner [5], [12] gives the CTC likelihood and the word boundaries shown under the spectrograms. Checkpoints: <span data-pdf="FN3-1"><code>kresnik/wav2vec2-large-xlsr-korean</code> and <code>MahmoudAshraf/mms-300m-1130-forced-aligner</code> on Hugging Face.</span> The forced-aligner model is licensed CC BY-NC 4.0.</li>
       <li data-nonpaper="spectrogram settings">Spectrograms: log-mel computed with librosa (n_fft 1024, hop 10 ms, 128 mel bands up to 8 kHz, fixed range −55 to 25 dB, magma color map).</li>
     </ul>
     <h3>References</h3>

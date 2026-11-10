@@ -62,8 +62,8 @@
       "@inproceedings{" + ((A && A.bibtexKey) || "kofleursr2027") + ",\n" +
       "  title     = {{KoFLEURS-R}: Improving Text and Audio Consistency in the {Korean} {FLEURS-R} Corpus},\n" +
       "  author    = {" + names + "},\n" +
-      "  booktitle = {" + (b.booktitle || "TODO") + "},\n" +
-      "  year      = {" + (b.year || "TODO") + "}\n}";
+      (b.booktitle && b.booktitle !== "TODO" ? "  booktitle = {" + b.booktitle + "},\n" : "") +
+      "  year      = {" + (b.year || "") + "}\n}";
   }
   function applyConfig() {
     document.body.classList.toggle("reviewing", !!CFG.reviewMode);
@@ -123,7 +123,8 @@
   let PPS = 80;
   let LAZY = false; // the candidates page (38 recordings) loads images lazily
   const KIND_TAG = { omission: "not spoken", insertion: "inserted", substitution: "misread", spoken: "spoken",
-                     repeat: "read again in Hangul", reading: "read differently from the default", "reading-default": "default reading" };
+                     repeat: "read again in Hangul", reading: "read differently from the default", "reading-default": "default reading",
+                     "chosen-repeat": "the gloss, read again in Hangul", "chosen-reading": "the selected reading" };
 
   function boxEl(m, dur) {
     const w = m.t1 - m.t0, narrow = w < 0.06;
@@ -267,7 +268,7 @@
     if (t.rr) f.append(h("span", { class: "rr", lang: "ko-Latn" }, t.rr));
     if (meaning && meaning.text) {
       f.append(h("span", { class: "en" }, "‘" + meaning.text + "’ ",
-                 h("span", { class: "todo review", title: meaning.source || "" }, "TODO review")));
+                 CFG.reviewMode ? h("span", { class: "todo review", title: meaning.source || "" }, "TODO review") : null));
     }
     return f;
   }
@@ -338,9 +339,9 @@
     const models = s.evidence, NAMES = rec.evidence_models;
     const hasCtc = s.options.some((o) => o.ctc_ll != null);
     const cands = s.options.map((o) => o.candidate_spoken);
-    const head = h("tr", null, h("th", null, "Option o"), h("th", { style: { textAlign: "left" } }, "Candidate c (spoken form)"),
+    const head = h("tr", null, h("th", null, "Option"), h("th", { style: { textAlign: "left" } }, "Candidate (spoken form)"),
       models.map((m) => h("th", { title: NAMES[m] }, "d · " + NAMES[m].replace("Whisper ", "").replace("Korean ", ""))),
-      h("th", null, h("i", null, "J"), h("sub", null, h("i", null, "i")), "(", h("i", null, "o"), ")"), hasCtc ? h("th", { title: "CTC log-likelihood" }, "CTC log-lik.") : null);
+      h("th", null, h("i", null, "J")), hasCtc ? h("th", { title: "CTC log-likelihood" }, "CTC log-lik.") : null);
     const body = s.options.map((o, c) => h("tr", { class: c === s.chosen ? "chosen" : null },
       h("td", { lang: "ko" }, short(optLabel(s, o), 22)),
       h("td", { class: "cand", lang: "ko" }, excerpt(cands, c)),
@@ -348,7 +349,8 @@
       h("td", { class: "num" }, fmtJ(o.J)),
       hasCtc ? h("td", { class: "num" }, o.ctc_ll == null ? "—" : fmt(o.ctc_ll, 2)) : null));
     const cap = h("caption", null, h("span", { class: "cap-num" }, SLOT_KIND[s.type] + " " + short(s.span, 40)),
-      " ", h("i", null, "J"), h("sub", null, h("i", null, "i")), "(", h("i", null, "o"), ") per option, Eq. (1) ", dataTag());
+      " score ", h("i", null, "J"), " of each option (Eq. (1) of the paper): average phonetic edit distance ", h("i", null, "d"),
+      " to the hypotheses; the lowest wins ", dataTag());
     return h("div", { class: "table-wrap" }, h("table", { class: "paper scores" }, cap, h("thead", null, head), h("tbody", null, body)));
   }
 
@@ -366,7 +368,7 @@
     if (s.type !== "paren" && rec) {
       const left = Object.keys(rec.evidence_models).filter((m) => !s.evidence.includes(m));
       if (left.length) {
-        out.push(h("div", { class: "formula" }, "Not in ℰ", h("sub", null, h("i", null, "i")), ": " +
+        out.push(h("div", { class: "formula" }, "Not used for this slot: " +
           left.map((m) => rec.evidence_models[m]).join(", ") + ". " +
           (left.length > 1 ? "Their hypotheses write" : "Its hypothesis writes") + " “" +
           ((s.span.match(/[\d,.]+|[A-Z]+/) || [s.span])[0]) + "” as written, which gives no reading. ",
@@ -394,9 +396,8 @@
         h("td", { class: "use" }, used.length ? used.join("; ") : "—")));
     }
     return h("div", { class: "table-wrap" }, h("table", { class: "paper hyps" },
-      h("caption", null, h("span", { class: "cap-num" }, "Hypotheses ", h("i", null, "h"), h("sub", null, "m")),
-        " used for slot ", h("i", null, "i"), " when model ", h("i", null, "m"), " is in ℰ", h("sub", null, h("i", null, "i")), " ", dataTag()),
-      h("thead", null, h("tr", null, h("th", null, "Model m"), h("th", { style: { textAlign: "left" } }, "Hypothesis"),
+      h("caption", null, h("span", { class: "cap-num" }, "Recognition hypotheses"), " ", dataTag()),
+      h("thead", null, h("tr", null, h("th", null, "Model"), h("th", { style: { textAlign: "left" } }, "Hypothesis"),
         h("th", { style: { textAlign: "left" } }, "Used for"))),
       h("tbody", null, rows)));
   }
@@ -407,6 +408,23 @@
     return h("div", { class: "baselines" },
       h("div", { class: "bl-head" }, "Baselines for this recording ", dataTag()),
       line("Remove-all", rec.text.remove_all), line("Whisper large-v3", rec.text.whisper_large_v3));
+  }
+
+  // Where the selected option of each slot with alternatives appears in spoken_text.
+  function resultMarks(rec) {
+    const text = rec.text.spoken_text.ko, out = [];
+    rec.slots.forEach((s) => {
+      const cands = s.options.map((o) => o.candidate_spoken);
+      if (cands.length < 2 || cands[s.chosen] !== text) return;
+      const n = Math.min.apply(null, cands.map((x) => x.length));
+      let p = 0, q = 0;
+      while (p < n && cands.every((x) => x[p] === cands[0][p])) p++;
+      while (q < n - p && cands.every((x) => x[x.length - 1 - q] === cands[0][cands[0].length - 1 - q])) q++;
+      if (text.length - q <= p) return; // omitted: nothing to mark
+      const name = s.options[s.chosen].name;
+      out.push({ start: p, end: text.length - q, type: s.type !== "paren" ? "chosen-reading" : name.startsWith("repeat") ? "chosen-repeat" : "spoken" });
+    });
+    return out.sort((a, b) => a.start - b.start);
   }
 
   /* ------------------------------------------------------------ demo cards */
@@ -451,7 +469,7 @@
     recs.forEach((rec) => {
       result.append(h("div", { class: "rec" }, recMeta(rec, who(rec, kind)),
         field("refined_text", rec.text.refined_text),
-        field("spoken_text", rec.text.spoken_text),
+        field("spoken_text", rec.text.spoken_text, resultMarks(rec)),
         h("div", { class: "scorebar" },
           h("span", null, h("code", null, "reliability_score"), " R = ", h("span", { class: "sv" }, fmt(rec.reliability_score, 4))),
           h("span", null, h("code", null, "min_gop"), " = ", h("span", { class: "sv" }, fmt(rec.min_gop, 2))), dataTag()),
@@ -498,15 +516,17 @@
 
   /* ------------------------------------------------------------ init */
   function choosePPS(R, prov) {
-    const files = prov.demos.flatMap((d) => d.files).map((f) => R[f.replace(".wav", "")]).filter(Boolean);
+    const files = prov.demos.flatMap((d) => d.files).concat(Object.values(prov.fig1).flat())
+      .map((f) => R[f.replace(".wav", "")]).filter(Boolean);
     const maxDur = Math.max.apply(null, files.map((r) => r.duration));
     const card = $(".demo .demo-body") || document.body;
     const avail = Math.max(240, card.clientWidth - 40);
-    PPS = Math.max(64, Math.min(110, Math.floor(avail / maxDur)));
+    // wide screens: the longest recording fits its card; narrow screens: keep 64 px/s and scroll
+    PPS = Math.max(avail >= 700 ? 40 : 64, Math.min(110, Math.floor(avail / maxDur)));
   }
 
   function init(D) {
-    const R = D.recordings, prov = D.provisional;
+    const R = D.recordings, prov = D.examples;
     choosePPS(R, prov);
     renderFig1(R, prov);
     prov.demos.forEach((def) => { const card = $('.demo[data-demo="' + def.key + '"]'); if (card) renderDemo(card, def, R); });

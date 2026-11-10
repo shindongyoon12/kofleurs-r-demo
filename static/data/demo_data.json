@@ -35,7 +35,7 @@
    "script": "demo/scripts/align_words.py"
   },
   "j_scores": "demo/scripts/reproduce_j.py (verify.verify() reproduces all 2,908 manifest records)",
-  "romanization": "Revised Romanization, ko-pron 1.3, word by word; not reviewed",
+  "romanization": "Revised Romanization, ko-pron 1.3, word by word",
   "models": {
    "whisper-large-v3": "Whisper large-v3",
    "whisper-large-v3-turbo": "Whisper large-v3-turbo",
@@ -105,8 +105,7 @@
    },
    "meaning_en": {
     "text": "Since the foundation of Asunción in 1537, Paraguay has managed to keep a lot of its indigenous character and identity.",
-    "source": "fleurs-r en_us (c621c0b), id 1765",
-    "status": "TODO: review (English source sentence of the same FLEURS id, not a translation of this recording)"
+    "source": "fleurs-r en_us (c621c0b), id 1765"
    },
    "reliability_score": 0.0,
    "min_gop": -0.73,
@@ -412,19 +411,6 @@
      "t1": 5.48,
      "from": "paren slot"
     }
-   ],
-   "human": {
-    "text_heard": "1537년 asunción이 설립된 이래 파라과이는 토착적인 특징과 정체성을 상당 부분 유지해 왔습니다",
-    "text_spoken": "천오백삼십칠년 아순시온이 설립된 이래 파라과이는 토착적인 특징과 정체성을 상당 부분 유지해 왔습니다",
-    "unsure": false,
-    "session": "session2",
-    "index": 54,
-    "corrected": false,
-    "text_heard_rr": "1537nyeon asuncióni seollipdoen irae paragwaineun tochakjeogin teukjinggwa jeongcheseongeul sangdang bubun yujihae watseumnida"
-   },
-   "residual_type": [
-    "5",
-    "human kept the Latin spelling; spoken forms agree better than written forms; audio not checked"
    ]
   },
   "10849776261913860801": {
@@ -489,8 +475,7 @@
    },
    "meaning_en": {
     "text": "German submarines were called U-Boats. The Germans were very good at navigating and operating their submarines.",
-    "source": "fleurs-r en_us (c621c0b), id 405",
-    "status": "TODO: review (English source sentence of the same FLEURS id, not a translation of this recording)"
+    "source": "fleurs-r en_us (c621c0b), id 405"
    },
    "reliability_score": 0.0133,
    "min_gop": -0.07,
@@ -737,9 +722,7 @@
      "t1": 5.06,
      "from": "paren slot"
     }
-   ],
-   "human": null,
-   "residual_type": null
+   ]
   },
   "11800040547070956694": {
    "id": "11800040547070956694",
@@ -803,8 +786,7 @@
    },
    "meaning_en": {
     "text": "The 25 Dunlap broadsides still known to exist are the oldest surviving copies of the document. The original handwritten copy has not survived.",
-    "source": "fleurs-r en_us (c621c0b), id 1964",
-    "status": "TODO: review (English source sentence of the same FLEURS id, not a translation of this recording)"
+    "source": "fleurs-r en_us (c621c0b), id 1964"
    },
    "reliability_score": 0.0128,
    "min_gop": -0.32,
@@ -1223,17 +1205,7 @@
      "t1": 3.36,
      "from": "number slot"
     }
-   ],
-   "human": {
-    "text_heard": "아직도 존재하는 것으로 알려진 25개의 던랩 브로드 사이드는 이 문서의 남아있는 가장 오래된 사본이다 손으로 쓴 원본은 더 이상 남아 있지 않다",
-    "text_spoken": "아직도 존재하는 것으로 알려진 이십오개의 던랩 브로드 사이드는 이 문서의 남아있는 가장 오래된 사본이다 손으로 쓴 원본은 더 이상 남아 있지 않다",
-    "unsure": false,
-    "session": "session1",
-    "index": 29,
-    "corrected": false,
-    "text_heard_rr": "ajikdo jonjaehaneun geoseuro allyeojin 25gaeui deollaep beurodeu saideuneun i munseoui namainneun gajang oraedoen sabonida soneuro sseun wonboneun deo isang nama itji anta"
-   },
-   "residual_type": null
+   ]
   },
   "14152602067612134390": {
    "id": "14152602067612134390",
@@ -1297,8 +1269,7 @@
    },
    "meaning_en": {
     "text": "Hydrogen ions are protons that had their electrons stripped off them (since Hydrogen atoms consist of one proton and one electron).",
-    "source": "fleurs en_us (70bb2e8), id 1814",
-    "status": "TODO: review (English source sentence of the same FLEURS id, not a translation of this recording)"
+    "source": "fleurs en_us (70bb2e8), id 1814"
    },
    "reliability_score": 0.0,
    "min_gop": -0.26,
@@ -1586,9 +1557,7 @@
      "t1": 10.26,
      "from": "paren slot"
     }
-   ],
-   "human": null,
-   "residual_type": null
+   ]
   },
   "14689351762998088074": {
    "id": "14689351762998088074",
@@ -1652,8 +1621,7 @@
    },
    "meaning_en": {
     "text": "German submarines were called U-Boats. The Germans were very good at navigating and operating their submarines.",
-    "source": "fleurs-r en_us (c621c0b), id 405",
-    "status": "TODO: review (English source sentence of the same FLEURS id, not a translation of this recording)"
+    "source": "fleurs-r en_us (c621c0b), id 405"
    },
    "reliability_score": 0.0,
    "min_gop": -0.06,
@@ -1910,9 +1878,7 @@
      "t1": 4.56,
      "from": "paren slot"
     }
-   ],
-   "human": null,
-   "residual_type": null
+   ]
   },
   "14945311428794587488": {
    "id": "14945311428794587488",
@@ -1976,8 +1942,7 @@
    },
    "meaning_en": {
     "text": "Hydrogen ions are protons that had their electrons stripped off them (since Hydrogen atoms consist of one proton and one electron).",
-    "source": "fleurs en_us (70bb2e8), id 1814",
-    "status": "TODO: review (English source sentence of the same FLEURS id, not a translation of this recording)"
+    "source": "fleurs en_us (70bb2e8), id 1814"
    },
    "reliability_score": 0.0,
    "min_gop": -0.58,
@@ -2151,17 +2116,7 @@
      "t1": 4.18,
      "from": "paren slot"
     }
-   ],
-   "human": {
-    "text_heard": "수소 이온은 전자가 벗겨져 나간 양성자이다 ",
-    "text_spoken": "수소 이온은 전자가 벗겨져 나간 양성자이다 ",
-    "unsure": false,
-    "session": "session2",
-    "index": 80,
-    "corrected": false,
-    "text_heard_rr": "suso ioneun jeonjaga beotgyeojyeo nagan yangseongjaida"
-   },
-   "residual_type": null
+   ]
   },
   "1807970046287819091": {
    "id": "1807970046287819091",
@@ -2225,8 +2180,7 @@
    },
    "meaning_en": {
     "text": "The 25 Dunlap broadsides still known to exist are the oldest surviving copies of the document. The original handwritten copy has not survived.",
-    "source": "fleurs-r en_us (c621c0b), id 1964",
-    "status": "TODO: review (English source sentence of the same FLEURS id, not a translation of this recording)"
+    "source": "fleurs-r en_us (c621c0b), id 1964"
    },
    "reliability_score": 0.0085,
    "min_gop": -1.73,
@@ -2645,9 +2599,7 @@
      "t1": 5.24,
      "from": "number slot"
     }
-   ],
-   "human": null,
-   "residual_type": null
+   ]
   },
   "3176854347698952072": {
    "id": "3176854347698952072",
@@ -2711,8 +2663,7 @@
    },
    "meaning_en": {
     "text": "Brazil is the largest Roman Catholic country on Earth, and the Roman Catholic Church has consistently opposed the legalization of same-sex marriage in the country.",
-    "source": "fleurs-r en_us (c621c0b), id 63",
-    "status": "TODO: review (English source sentence of the same FLEURS id, not a translation of this recording)"
+    "source": "fleurs-r en_us (c621c0b), id 63"
    },
    "reliability_score": 0.0495,
    "min_gop": -1.61,
@@ -3114,9 +3065,7 @@
      "t1": 9.58,
      "from": "Whisper large-v3 hypothesis"
     }
-   ],
-   "human": null,
-   "residual_type": null
+   ]
   },
   "987799419854082105": {
    "id": "987799419854082105",
@@ -3180,8 +3129,7 @@
    },
    "meaning_en": {
     "text": "Needless to say, if you know a Romance language, it will be easier for you to learn Portuguese.",
-    "source": "fleurs en_us (70bb2e8), id 1994",
-    "status": "TODO: review (English source sentence of the same FLEURS id, not a translation of this recording)"
+    "source": "fleurs en_us (70bb2e8), id 1994"
    },
    "reliability_score": 0.0411,
    "min_gop": -0.79,
@@ -3432,24 +3380,11 @@
      "t1": 5.24,
      "from": "human reference (text_spoken)"
     }
-   ],
-   "human": {
-    "text_heard": "당연한 말이지만 당신이 로맨스어를 안다면 포르투칼어를 배우는 것이 매우 쉬울 것입니다",
-    "text_spoken": "당연한 말이지만 당신이 로맨스어를 안다면 포르투칼어를 배우는 것이 매우 쉬울 것입니다",
-    "unsure": false,
-    "session": "session1",
-    "index": 59,
-    "corrected": true,
-    "text_heard_rr": "dangyeonhan marijiman dangsini romaenseueoreul andamyeon poreutukareoreul baeuneun geosi maeu swiul geosimnida"
-   },
-   "residual_type": [
-    "3/1",
-    "human text has extra symbols (speech not in the script); audio not checked"
    ]
   }
  },
  "groups": null,
- "provisional": {
+ "examples": {
   "demos": [
    {
     "key": "omission",
