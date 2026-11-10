@@ -124,7 +124,8 @@
   let LAZY = false; // the candidates page (38 recordings) loads images lazily
   const KIND_TAG = { omission: "not spoken", insertion: "inserted", substitution: "misread", spoken: "spoken",
                      repeat: "read again in Hangul", reading: "read differently from the default", "reading-default": "default reading",
-                     "chosen-repeat": "the gloss, read again in Hangul", "chosen-reading": "the selected reading" };
+                     "chosen-repeat": "the gloss, read again in Hangul", "chosen-reading": "the selected reading",
+                     "chosen-read": "the parenthetical, spoken and kept" };
 
   function boxEl(m, dur) {
     const w = m.t1 - m.t0, narrow = w < 0.06;
@@ -135,24 +136,30 @@
     return h("div", { class: "spec-box " + m.type + (left > 72 ? " tag-right" : ""), style, title: tag }, h("span", { class: "tag" }, tag));
   }
 
-  // label width estimate at 11.5 px: Hangul ~ 11.5 px, other characters ~ 6.8 px, plus padding
-  const labelWidth = (s) => Array.from(s).reduce((a, c) => a + (/[가-힣]/.test(c) ? 11.5 : 6.8), 0) + 8;
+  // Word labels in two rows. Label width estimate at 11 px: Hangul ~11 px, other characters ~6.5 px,
+  // plus padding. Each label goes to the row with more room; a label that would still touch its
+  // neighbour in that row is set in a smaller font (down to 80 %).
+  const FONT = 11;
+  const labelWidth = (s, px) => Array.from(s).reduce((a, c) => a + (/[가-힣]/.test(c) ? px : px * 0.6), 0) + 4;
   function wordStrip(words, dur, widthPx) {
     const strip = h("div", { class: "spec-words", "aria-hidden": "true" });
-    const rowEnd = [];
+    const rowEnd = [-Infinity, -Infinity];
     words.filter((w) => w.t0 != null).forEach((w) => {
-      // the label is centered on the word; put it on the first row where it does not touch the previous label
-      const center = ((w.t0 + w.t1) / 2 / dur) * widthPx, half = labelWidth(w.w) / 2;
-      let row = rowEnd.findIndex((end) => end < center - half - 2);
-      if (row < 0) row = rowEnd.length;
+      const center = ((w.t0 + w.t1) / 2 / dur) * widthPx;
+      const row = rowEnd[0] <= rowEnd[1] ? 0 : 1;
+      let px = FONT, half = labelWidth(w.w, px) / 2;
+      const room = center - rowEnd[row] - 3;  // space to the left of the center in this row
+      if (room < half) {
+        px = Math.max(FONT * 0.8, (FONT * room) / half);
+        half = labelWidth(w.w, px) / 2;
+      }
       rowEnd[row] = center + half;
       strip.append(h("div", {
         class: "wd" + (w.hl ? " hl-" + w.hl : ""),
-        style: { left: (w.t0 / dur) * 100 + "%", width: ((w.t1 - w.t0) / dur) * 100 + "%", top: row * 20 + "px" },
+        style: { left: (w.t0 / dur) * 100 + "%", width: ((w.t1 - w.t0) / dur) * 100 + "%", top: row * 19 + "px" },
         title: w.w + (w.rr ? " (" + w.rr + ")" : "") + "  " + w.t0.toFixed(2) + "–" + w.t1.toFixed(2) + " s",
-      }, h("span", { class: "ko" }, w.w)));
+      }, h("span", { class: "ko", style: px < FONT ? { fontSize: px.toFixed(1) + "px" } : null }, w.w)));
     });
-    strip.style.height = Math.max(1, rowEnd.length) * 20 + 2 + "px";
     return strip;
   }
 
@@ -422,7 +429,7 @@
       while (q < n - p && cands.every((x) => x[x.length - 1 - q] === cands[0][cands[0].length - 1 - q])) q++;
       if (text.length - q <= p) return; // omitted: nothing to mark
       const name = s.options[s.chosen].name;
-      out.push({ start: p, end: text.length - q, type: s.type !== "paren" ? "chosen-reading" : name.startsWith("repeat") ? "chosen-repeat" : "spoken" });
+      out.push({ start: p, end: text.length - q, type: s.type !== "paren" ? "chosen-reading" : name.startsWith("repeat") ? "chosen-repeat" : "chosen-read" });
     });
     return out.sort((a, b) => a.start - b.start);
   }
