@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KoFLEURS-R Demo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Audio examples and results for KoFLEURS-R: Improving Text and Audio Consistency in the Korean FLEURS-R Corpus.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%231d2733%22/%3E%3Cpath d=%22M6 22V10m4 12V6m4 16V12m4 10V8m4 14V14m4 8V11%22 stroke=%22white%22 stroke-width=%222.4%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro&amp;family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&amp;family=Noto+Sans+KR:wght@400;700&amp;family=Noto+Sans+Mono:wght@400;600&amp;display=swap">
+<link rel="stylesheet" href="static/css/bulma.min.css">
+<link rel="stylesheet" href="static/css/site.css">
+<script src="static/js/config.js"></script>
+<script defer src="static/js/site.js"></script>
+</head>
+<body>
+<main id="main-content">
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title publication-title" data-pdf="T-1"><span class="name">KoFLEURS-R</span>: Improving Text and Audio Consistency in the Korean FLEURS-R Corpus</h1>
+      <div class="publication-authors" id="authors"></div>
+      <div class="publication-links" id="pub-links"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="abstract" style="padding-top: 0.5rem;">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 has-text-centered">Abstract</h2>
+    <p class="wide abstract">
+      <span data-pdf="ABS-1">We present KoFLEURS-R, a refined version of the Korean portion of FLEURS-R that improves text-audio consistency at the recording level.</span>
+      <span data-pdf="ABS-2">FLEURS-R improves the acoustic quality of FLEURS recordings but retains the recording scripts, which do not always match what was actually spoken.</span>
+      <span data-pdf="ABS-3">In particular, parenthetical expressions may be spoken or omitted depending on the speaker, resulting in transcription mismatches.</span>
+      <span data-pdf="ABS-4">To address this issue, we propose a script-constrained refinement method that generates transcription candidates from the original text and selects the most appropriate candidate using acoustic evidence from two Whisper models, a Korean wav2vec 2.0 model, and a connectionist temporal classification (CTC) forced aligner.</span>
+      <span data-pdf="ABS-5">Evaluation on 189 human-verified recordings shows that KoFLEURS-R reduces the phonetic-key-normalized micro character error rate (CER) from 1.54% to 0.21%, an 86.4% relative reduction.</span>
+      <span data-pdf="ABS-6">The method outperforms both the removal of all parenthetical content and unconstrained automatic speech recognition (ASR), and correctly classifies 33 of 34 manually verified parenthetical occurrences (97.1%).</span>
+      <span data-pdf="ABS-7">The results suggest that script-constrained refinement can reduce transcript mismatches without replacing the script with error-prone ASR output.</span>
+      <span data-pdf="ABS-8">The refined metadata and the refinement pipeline will be released.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ Problem -->
+<section class="section band" id="problem">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">Text-Audio Mismatches in FLEURS-R</h2>
+    <p class="wide">
+      <span data-pdf="IIB-1">Text-audio mismatches can be classified into three types (Fig. 1): <em>omission</em>, <em>insertion</em>, and <em>substitution</em>.</span>
+      <span data-pdf="IIB-2">Omission occurs when script content is not spoken; it frequently involves parenthetical content, which FLEURS normalization retains after removing the parentheses.</span>
+      <span data-pdf="IIB-3">Insertion occurs when speech contains content absent from the script, such as words added by the speaker.</span>
+      <span data-pdf="IIB-4">Substitution occurs when script content is spoken differently, typically as a result of a reading error.</span>
+    </p>
+
+    <figure class="fig1-figure" id="fig1">
+      <div class="fig1">
+        <div class="fig1-panel" style="--n: 5">
+          <h4 data-pdf-fig="(a) Omission: unspoken text">(a) Omission: unspoken text</h4>
+          <div class="fig1-grid">
+            <span class="fig1-rowlabel">Text</span>
+            <div class="fbox">아순시온<i>asunsion</i></div>
+            <div class="fbox hl omit">asunción<i>asunción</i></div>
+            <div class="fbox">-이<i>-i</i></div>
+            <div class="fbox">설립된<i>seollipdoen</i></div>
+            <div class="fbox">이래<i>irae</i></div>
+            <span></span>
+            <div class="flink"></div><div class="flink mis omit"></div><div class="flink"></div><div class="flink"></div><div class="flink"></div>
+            <span class="fig1-rowlabel">Audio</span>
+            <div class="fbox">아순시온<i>asunsion</i></div>
+            <div class="fbox empty omit" role="img" aria-label="not spoken"></div>
+            <div class="fbox">-이<i>-i</i></div>
+            <div class="fbox">설립된<i>seollipdoen</i></div>
+            <div class="fbox">이래<i>irae</i></div>
+          </div>
+          <div class="fig1-gloss">‘since Asunción was founded’</div>
+        </div>
+        <div class="fig1-panel" style="--n: 5">
+          <h4 data-pdf-fig="(b) Insertion: unscripted speech">(b) Insertion: unscripted speech</h4>
+          <div class="fig1-grid">
+            <span class="fig1-rowlabel">Text</span>
+            <div class="fbox">배우는<i>baeuneun</i></div>
+            <div class="fbox">것이<i>geosi</i></div>
+            <div class="fbox empty ins" role="img" aria-label="not in the script"></div>
+            <div class="fbox">쉬울<i>swiul</i></div>
+            <div class="fbox">것입니다<i>geosimnida</i></div>
+            <span></span>
+            <div class="flink"></div><div class="flink"></div><div class="flink mis ins"></div><div class="flink"></div><div class="flink"></div>
+            <span class="fig1-rowlabel">Audio</span>
+            <div class="fbox">배우는<i>baeuneun</i></div>
+            <div class="fbox">것이<i>geosi</i></div>
+            <div class="fbox hl ins">매우<i>maeu</i></div>
+            <div class="fbox">쉬울<i>swiul</i></div>
+            <div class="fbox">것입니다<i>geosimnida</i></div>
+          </div>
+          <div class="fig1-gloss">‘learning it will be (<b>very</b>) easy’</div>
+        </div>
+        <div class="fig1-panel" style="--n: 4">
+          <h4 data-pdf-fig="(c) Substitution: misread text">(c) Substitution: misread text</h4>
+          <div class="fig1-grid">
+            <span class="fig1-rowlabel">Text</span>
+            <div class="fbox">로마<i>roma</i></div>
+            <div class="fbox">가톨릭<i>gatollik</i></div>
+            <div class="fbox hl sub">교회는<i>gyohoe-neun</i></div>
+            <div class="fbox">브라질에서<i>beurajir-eseo</i></div>
+            <span></span>
+            <div class="flink"></div><div class="flink"></div><div class="flink mis sub"></div><div class="flink"></div>
+            <span class="fig1-rowlabel">Audio</span>
+            <div class="fbox">로마<i>roma</i></div>
+            <div class="fbox">가톨릭<i>gatollik</i></div>
+            <div class="fbox hl sub">국가는<i>gukga-neun</i></div>
+            <div class="fbox">브라질에서<i>beurajir-eseo</i></div>
+          </div>
+          <div class="fig1-gloss">‘the Roman Catholic <b>Church</b> → <b>country</b> in Brazil’</div>
+        </div>
+      </div>
+      <figcaption class="paper-cap"><span class="cap-num">Fig. 1.</span>
+        <span data-pdf="F1-1">Examples of omissions, insertions, and substitutions in Korean text-audio pairs, all confirmed by listening.</span>
+        <span data-pdf="F1-2">Boxes show the script (top) and the spoken content (bottom); dashed links indicate mismatches.</span>
+        <span data-pdf="F1-3">In (c), another speaker of the same script reads 교회는 as written.</span>
+      </figcaption>
+    </figure>
+
+    <div id="fig1-listen"></div>
+  </div>
+</section>
+
+<!-- ============================================================ Method overview -->
+<section class="section" id="method">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">Method Overview</h2>
+    <p class="wide">
+      <span data-pdf="I-15">Rather than replacing the original text with ASR output, our method selects from a closed set of candidates derived from the original sentence, so recognition errors cannot enter the text.</span>
+      <span data-pdf="I-17">For each recording, we choose slot options using phonetic edit distances to hypotheses from two Whisper models [9] and a Korean wav2vec 2.0 model [10], [11].</span>
+    </p>
+    <figure>
+      <div class="pipeline-wrap">
+        <svg class="pipeline" viewBox="0 0 980 300" role="img" aria-labelledby="pl-title pl-desc">
+          <title id="pl-title">KoFLEURS-R pipeline</title>
+          <desc id="pl-desc">Candidates are generated from the script and one is selected per recording. Parenthetical slots use the two Whisper models; number and acronym slots also use the Korean wav2vec 2.0 model; ambiguous acronym readings also use a CTC forced aligner. The outputs are refined_text, spoken_text and the reliability score R from the two Whisper models.</desc>
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow-fill"/></marker>
+          </defs>
+          <!-- inputs -->
+          <rect class="p-in" x="10" y="40" width="160" height="56" rx="8"/>
+          <text class="t-head" x="90" y="64" text-anchor="middle">Recording</text>
+          <text class="t-small" x="90" y="82" text-anchor="middle">FLEURS-R audio</text>
+          <rect class="p-in" x="10" y="190" width="160" height="56" rx="8"/>
+          <text class="t-head" x="90" y="214" text-anchor="middle">Script</text>
+          <text class="t-mono" x="90" y="233" text-anchor="middle">raw_transcription</text>
+          <!-- recognizers (one group: each feeds the selection) -->
+          <rect class="p-box" x="203" y="8" width="224" height="122" rx="10"/>
+          <rect class="p-whisper" x="215" y="18" width="200" height="30" rx="6"/>
+          <text class="t-model" x="315" y="38" text-anchor="middle">Whisper large-v3, -turbo</text>
+          <rect class="p-w2v" x="215" y="54" width="200" height="30" rx="6"/>
+          <text class="t-model" x="315" y="74" text-anchor="middle">Korean wav2vec 2.0</text>
+          <rect class="p-ctc" x="215" y="90" width="200" height="30" rx="6"/>
+          <text class="t-model" x="315" y="110" text-anchor="middle">CTC forced aligner</text>
+          <path class="edge" d="M170,68 L201,68" marker-end="url(#arr)"/>
+          <!-- candidates -->
+          <rect class="p-step" x="215" y="176" width="200" height="84" rx="8"/>
+          <text class="t-head" x="315" y="200" text-anchor="middle">Candidates</text>
+          <text class="t-small" x="315" y="220" text-anchor="middle">one option per slot:</text>
+          <text class="t-small" x="315" y="238" text-anchor="middle">parenthetical, number, acronym</text>
+          <path class="edge" d="M170,218 L213,218" marker-end="url(#arr)"/>
+          <!-- selection -->
+          <rect class="p-box" x="470" y="70" width="290" height="190" rx="10"/>
+          <text class="t-head" x="615" y="96" text-anchor="middle">Selection per recording</text>
+          <text class="t-head" x="486" y="128" style="font-size:12px">Parenthetical</text>
+          <rect class="p-whisper" x="640" y="115" width="104" height="18" rx="9"/><text class="t-small" x="692" y="128" text-anchor="middle" style="fill:var(--fg)">Whisper ×2</text>
+          <text class="t-small" x="486" y="144">ties: omission</text>
+          <text class="t-head" x="486" y="176" style="font-size:12px">Number, acronym</text>
+          <rect class="p-whisper" x="640" y="163" width="104" height="18" rx="9"/><text class="t-small" x="692" y="176" text-anchor="middle" style="fill:var(--fg)">Whisper ×2</text>
+          <rect class="p-w2v" x="640" y="185" width="104" height="18" rx="9"/><text class="t-small" x="692" y="198" text-anchor="middle" style="fill:var(--fg)">+ wav2vec 2.0</text>
+          <text class="t-head" x="486" y="234" style="font-size:12px">Ambiguous acronym</text>
+          <rect class="p-ctc" x="640" y="221" width="104" height="18" rx="9"/><text class="t-small" x="692" y="234" text-anchor="middle" style="fill:var(--fg)">+ CTC aligner</text>
+          <path class="edge" d="M427,69 C450,69 450,110 468,110" marker-end="url(#arr)"/>
+          <path class="edge" d="M415,218 L468,218" marker-end="url(#arr)"/>
+          <!-- outputs -->
+          <rect class="p-out" x="805" y="70" width="165" height="110" rx="8"/>
+          <text class="t-head" x="887" y="94" text-anchor="middle">Refined text</text>
+          <text class="t-mono" x="887" y="122" text-anchor="middle">refined_text</text>
+          <text class="t-mono" x="887" y="150" text-anchor="middle">spoken_text</text>
+          <rect class="p-out" x="805" y="196" width="165" height="64" rx="8"/>
+          <text class="t-head" x="887" y="220" text-anchor="middle">Reliability score R</text>
+          <rect class="p-whisper" x="835" y="230" width="104" height="18" rx="9"/><text class="t-small" x="887" y="243" text-anchor="middle" style="fill:var(--fg)">Whisper ×2</text>
+          <path class="edge" d="M760,125 L803,125" marker-end="url(#arr)"/>
+          <path class="edge" d="M887,180 L887,194" marker-end="url(#arr)"/>
+        </svg>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================================================ Examples -->
+<section class="section band" id="examples">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">Examples</h2>
+    <p class="spec-hint" style="max-width: none">Each example compares two speakers of the same script. Spectrograms are log-mel with one color scale for all recordings; click one to enlarge it. Word boundaries come from forced alignment and may be imprecise.</p>
+
+    <article class="demo" id="demo-omission" data-demo="omission">
+      <div class="demo-head"><h3>1. Omission</h3><span class="kind">a parenthetical spoken by one speaker, skipped by the other</span></div>
+      <p class="demo-lead">
+        <span data-pdf="I-11">For example, parenthetical content in a recording script may be read aloud by one speaker but omitted by another.</span>
+        <span data-pdf="I-12">Retaining the content would introduce unspoken words into the text of the latter recording, whereas removing it would omit spoken words from the former.</span>
+      </p>
+      <div class="demo-body"></div>
+    </article>
+
+    <article class="demo" id="demo-insertion" data-demo="insertion">
+      <div class="demo-head"><h3>2. Insertion</h3><span class="kind">a gloss read again in Hangul by one speaker</span></div>
+      <p class="demo-lead">
+        <span data-pdf="IIIA-3">For example, “크레바스(crevasse)” may be read as “크레바스” (<em>keurebaseu</em>), with the gloss omitted, or as “크레바스 크레바스” (<em>keurebaseu keurebaseu</em>), with the gloss read in Hangul.</span>
+      </p>
+      <div class="demo-body"></div>
+    </article>
+
+    <article class="demo" id="demo-substitution" data-demo="substitution">
+      <div class="demo-head"><h3>3. Substitution</h3><span class="kind">a number read in two ways</span></div>
+      <p class="demo-lead">
+        <span data-pdf="IIIA-4">Similarly, we define slots for numbers and acronyms, which may have multiple readings; for instance, “3” may be read as “삼” (<em>sam</em>) or “셋” (<em>set</em>).</span>
+      </p>
+      <div class="demo-body"></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================ BibTeX -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <div class="bibtex-header">
+      <h2 class="title is-3">BibTeX</h2>
+      <button class="icon-btn" type="button" id="copy-bibtex">Copy</button>
+    </div>
+    <pre id="bibtex-code"><code></code></pre>
+  </div>
+</section>
+</main>
+
+<!-- ============================================================ Footer: sources and credits -->
+<footer class="footer">
+  <div class="container is-max-desktop content">
+    <h3>Data and models</h3>
+    <ul>
+      <li data-nonpaper="sources and licenses">Audio and transcriptions: FLEURS-R [7], derived from FLEURS [6]; both CC BY 4.0. The English sentences under the examples are the FLEURS en_us sentences with the same id (CC BY 4.0).</li>
+      <li data-nonpaper="sources and licenses">Models: Whisper large-v3 and large-v3-turbo [9] and a Korean wav2vec 2.0 model give the recognition hypotheses; a CTC forced aligner gives the CTC likelihood and the word boundaries shown under the spectrograms. Checkpoints: <span data-pdf="FN3-1"><code>kresnik/wav2vec2-large-xlsr-korean</code> and <code>MahmoudAshraf/mms-300m-1130-forced-aligner</code> on Hugging Face.</span> The forced-aligner model is licensed CC BY-NC 4.0.</li>
+      <li data-nonpaper="spectrogram settings">Spectrograms: log-mel computed with librosa (n_fft 1024, hop 10 ms, 128 mel bands up to 8 kHz, fixed range −55 to 25 dB, magma color map).</li>
+    </ul>
+    <h3>References</h3>
+    <ol class="refs" style="list-style: none; margin-left: 0">
+      <li data-pdf="R-5">[5] V. Pratap, A. Tjandra, B. Shi, P. Tomasello, A. Babu, S. Kundu, A. Elkahky, Z. Ni <em>et al.</em>, “Scaling speech technology to 1,000+ languages,” <em>Journal of Machine Learning Research</em>, vol. 25, no. 97, pp. 1–52, 2024.</li>
+      <li data-pdf="R-6">[6] A. Conneau, M. Ma, S. Khanuja, Y. Zhang, V. Axelrod, S. Dalmia, J. Riesa, C. Rivera, and A. Bapna, “FLEURS: Few-shot learning evaluation of universal representations of speech,” in <em>Proc. IEEE Spoken Language Technology Workshop (SLT)</em>, 2022, pp. 798–805.</li>
+      <li data-pdf="R-7">[7] M. Ma, Y. Koizumi, S. Karita, H. Zen, J. Riesa, H. Ishikawa, and M. Bacchiani, “FLEURS-R: A restored multilingual speech corpus for generation tasks,” in <em>Proc. Interspeech</em>, 2024, pp. 1835–1839.</li>
+      <li data-pdf="R-9">[9] A. Radford, J. W. Kim, T. Xu, G. Brockman, C. McLeavey, and I. Sutskever, “Robust speech recognition via large-scale weak supervision,” in <em>Proc. International Conference on Machine Learning (ICML)</em>, ser. Proc. Machine Learning Research, vol. 202, 2023, pp. 28 492–28 518.</li>
+      <li data-pdf="R-10">[10] A. Baevski, Y. Zhou, A. Mohamed, and M. Auli, “wav2vec 2.0: A framework for self-supervised learning of speech representations,” in <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, vol. 33, 2020, pp. 12 449–12 460.</li>
+      <li data-pdf="R-11">[11] A. Conneau, A. Baevski, R. Collobert, A. Mohamed, and M. Auli, “Unsupervised cross-lingual representation learning for speech recognition,” in <em>Proc. Interspeech</em>, 2021, pp. 2426–2430.</li>
+      <li data-pdf="R-12">[12] A. Graves, S. Fernández, F. Gomez, and J. Schmidhuber, “Connectionist temporal classification: Labelling unsegmented sequence data with recurrent neural networks,” in <em>Proc. International Conference on Machine Learning (ICML)</em>, 2006, pp. 369–376.</li>
+    </ol>
+    <p data-nonpaper="template credit">This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>, which was adopted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> project page. The template is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+  </div>
+</footer>
+
+<dialog class="zoom" id="zoom" aria-labelledby="zoom-title">
+  <div class="zoom-head">
+    <span class="t" id="zoom-title"></span>
+    <span style="display:flex; gap:0.4rem">
+      <button type="button" class="icon-btn" id="zoom-play">Play</button>
+      <button type="button" class="icon-btn" id="zoom-close">Close</button>
+    </span>
+  </div>
+  <div class="zoom-body"></div>
+  <p class="spec-hint">Click the spectrogram to move the playback position.</p>
+</dialog>
+</body>
+</html>
