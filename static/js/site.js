@@ -147,7 +147,7 @@
       if (row < 0) row = rowEnd.length;
       rowEnd[row] = center + half;
       strip.append(h("div", {
-        class: "wd",
+        class: "wd" + (w.hl ? " hl-" + w.hl : ""),
         style: { left: (w.t0 / dur) * 100 + "%", width: ((w.t1 - w.t0) / dur) * 100 + "%", top: row * 20 + "px" },
         title: w.w + (w.rr ? " (" + w.rr + ")" : "") + "  " + w.t0.toFixed(2) + "–" + w.t1.toFixed(2) + " s",
       }, h("span", { class: "ko" }, w.w)));
@@ -427,6 +427,18 @@
     return out.sort((a, b) => a.start - b.start);
   }
 
+  // Word labels under the result spectrogram: the words of spoken_text (what was said, e.g. 이십오 for 25),
+  // with the words that the selected slot option produced highlighted.
+  function spokenWords(rec) {
+    const text = rec.text.spoken_text.ko, marks = resultMarks(rec), starts = [];
+    for (const m of text.matchAll(/\S+/g)) starts.push([m.index, m.index + m[0].length]);
+    return rec.words.spoken.map((w, k) => {
+      const [a, b] = starts[k] || [-1, -1];
+      const m = marks.find((x) => x.type !== "spoken" && a < x.end && b > x.start);
+      return m ? Object.assign({}, w, { hl: m.type }) : w;
+    });
+  }
+
   /* ------------------------------------------------------------ demo cards */
   function who(rec, kind) {
     const m = rec.highlights[0];
@@ -465,7 +477,7 @@
       process.append(blk);
     });
 
-    const result = h("li", { class: "step" }, h("h4", null, "Result: refined text and scores"));
+    const result = h("li", { class: "step" }, h("h4", null, "Result: refined text"));
     recs.forEach((rec) => {
       result.append(h("div", { class: "rec" }, recMeta(rec, who(rec, kind)),
         field("refined_text", rec.text.refined_text),
@@ -473,7 +485,7 @@
         h("div", { class: "scorebar" },
           h("span", null, h("code", null, "reliability_score"), " R = ", h("span", { class: "sv" }, fmt(rec.reliability_score, 4))),
           h("span", null, h("code", null, "min_gop"), " = ", h("span", { class: "sv" }, fmt(rec.min_gop, 2))), dataTag()),
-        listenBlock(rec, null, rec.words.refined)));
+        listenBlock(rec, null, spokenWords(rec))));
     });
     steps.append(problem, process, result);
     body.append(steps);

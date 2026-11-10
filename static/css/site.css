@@ -263,9 +263,11 @@ figcaption.paper-cap .cap-num { font-weight: 700; margin-right: 0.3rem; }
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.55); pointer-events: none; opacity: 0; transition: opacity 0.15s; }
 .playing .playhead, .playhead.shown { opacity: 1; }
 .spec-words { position: relative; height: 40px; margin-top: 2px; }
-.spec-words .wd { position: absolute; top: 0; height: 18px; border-left: 1px solid var(--box-line); border-right: 1px solid var(--box-line);
+.spec-words .wd { position: absolute; top: 0; height: 18px;
   font: 11.5px/18px var(--font-ko); color: var(--fg); text-align: center; white-space: nowrap; overflow: visible; }
 .spec-words .wd span { position: relative; left: 50%; transform: translateX(-50%); display: inline-block; padding: 0 2px; background: var(--card); }
+.spec-words .wd.hl-chosen-repeat span { background: var(--ins-bg); outline: 1px solid var(--ins); color: var(--ins-text); font-weight: 700; border-radius: 3px; }
+.spec-words .wd.hl-chosen-reading span { background: var(--sub-bg); outline: 1px solid var(--sub); color: var(--sub-text); font-weight: 700; border-radius: 3px; }
 .spec-axis { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--faint); margin-top: 1px; font-variant-numeric: tabular-nums; }
 .audio-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin: 0.3rem 0; }
 .audio-row audio { height: 34px; max-width: 100%; width: 320px; }
