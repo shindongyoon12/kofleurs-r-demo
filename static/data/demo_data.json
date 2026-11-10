@@ -192,6 +192,20 @@
     "whisper-large-v3-turbo": "Whisper large-v3-turbo",
     "w2v2-ko": "Korean wav2vec 2.0"
    },
+   "reliability": {
+    "whisper-large-v3-turbo": {
+     "e": 0,
+     "N": 103,
+     "rate": 0.0,
+     "marks": null
+    },
+    "whisper-large-v3": {
+     "e": 0,
+     "N": 103,
+     "rate": 0.0,
+     "marks": null
+    }
+   },
    "words": {
     "refined": [
      {
@@ -413,317 +427,6 @@
     }
    ]
   },
-  "10849776261913860801": {
-   "id": "10849776261913860801",
-   "file": "10849776261913860801.wav",
-   "split": "train",
-   "speaker": "female",
-   "sentence_id": 405,
-   "duration": 14.32,
-   "sample_rate": 24000,
-   "in_eval_189": false,
-   "audio": "static/audio/10849776261913860801.mp3",
-   "spectrogram": "static/spectrograms/10849776261913860801.png",
-   "spectrogram_px": [
-    2864,
-    256
-   ],
-   "audio_check": {
-    "wav_samples": 343680,
-    "mp3_decoded_samples": 343680,
-    "equal": true
-   },
-   "text": {
-    "raw_transcription": {
-     "ko": "독일 잠수함은 유보트(U-Boat)라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-     "rr": "dogil jamsuhameun yuboteu(U-Boat)rago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-    },
-    "transcription": {
-     "ko": "독일 잠수함은 유보트u-boat라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다",
-     "rr": "dogil jamsuhameun yuboteuu-boatrago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda"
-    },
-    "refined_text": {
-     "ko": "독일 잠수함은 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다",
-     "rr": "dogil jamsuhameun yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda"
-    },
-    "spoken_text": {
-     "ko": "독일 잠수함은 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-     "rr": "dogil jamsuhameun yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-    },
-    "remove_all": {
-     "ko": "독일 잠수함은 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-     "rr": "dogil jamsuhameun yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-    },
-    "whisper_large_v3": {
-     "ko": "독일 잠수함은 유보트라고 불렸다 독일군은 잠수함을 항해하고 운영하는 데 아주 능했다",
-     "rr": "dogil jamsuhameun yuboteurago bullyeotda dogilguneun jamsuhameul hanghaehago unyeonghaneun de aju neunghaetda"
-    }
-   },
-   "hypotheses": {
-    "whisper-large-v3": {
-     "ko": "독일 잠수함은 유보트라고 불렸다 독일군은 잠수함을 항해하고 운영하는 데 아주 능했다",
-     "rr": "dogil jamsuhameun yuboteurago bullyeotda dogilguneun jamsuhameul hanghaehago unyeonghaneun de aju neunghaetda"
-    },
-    "whisper-large-v3-turbo": {
-     "ko": "독일 잠수함은 유보트라고 불렸다 독일군은 잠수함을 항해하고 운영하는데 아주 능했다",
-     "rr": "dogil jamsuhameun yuboteurago bullyeotda dogilguneun jamsuhameul hanghaehago unyeonghaneunde aju neunghaetda"
-    },
-    "w2v2-ko": {
-     "ko": "독일잠수함은유보트라고불렸독일구는잠수함을항위하고운영하는데아주등었다",
-     "rr": "dogiljamsuhameunyuboteuragobullyeotdogilguneunjamsuhameulhangwihagounyeonghaneundeajudeungeotda"
-    }
-   },
-   "meaning_en": {
-    "text": "German submarines were called U-Boats. The Germans were very good at navigating and operating their submarines.",
-    "source": "fleurs-r en_us (c621c0b), id 405"
-   },
-   "reliability_score": 0.0133,
-   "min_gop": -0.07,
-   "slots": [
-    {
-     "type": "paren",
-     "span": "(U-Boat)",
-     "options": [
-      {
-       "name": "drop",
-       "insert": "",
-       "candidate_spoken": "독일 잠수함은 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-       "distance": {
-        "whisper-large-v3-turbo": 1,
-        "whisper-large-v3": 1
-       },
-       "J": 1.0,
-       "ctc_ll": -10.82,
-       "insert_rr": "",
-       "candidate_spoken_rr": "dogil jamsuhameun yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-      },
-      {
-       "name": "read",
-       "insert": " U-Boat",
-       "candidate_spoken": "독일 잠수함은 유보트 U-Boat라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-       "distance": {
-        "whisper-large-v3-turbo": 6,
-        "whisper-large-v3": 6
-       },
-       "J": 6.0,
-       "ctc_ll": -57.92,
-       "insert_rr": "U-Boat",
-       "candidate_spoken_rr": "dogil jamsuhameun yuboteu U-Boatrago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-      },
-      {
-       "name": "repeat1",
-       "insert": " 유보트",
-       "candidate_spoken": "독일 잠수함은 유보트 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-       "distance": {
-        "whisper-large-v3-turbo": 6,
-        "whisper-large-v3": 6
-       },
-       "J": 6.0,
-       "ctc_ll": -63.18,
-       "insert_rr": "yuboteu",
-       "candidate_spoken_rr": "dogil jamsuhameun yuboteu yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-      }
-     ],
-     "evidence": [
-      "whisper-large-v3-turbo",
-      "whisper-large-v3"
-     ],
-     "chosen_by_J": 0,
-     "chosen": 0,
-     "source": "asr",
-     "margin": -5.0,
-     "ctc_margin": -47.1
-    }
-   ],
-   "evidence_models": {
-    "whisper-large-v3": "Whisper large-v3",
-    "whisper-large-v3-turbo": "Whisper large-v3-turbo",
-    "w2v2-ko": "Korean wav2vec 2.0"
-   },
-   "words": {
-    "refined": [
-     {
-      "w": "독일",
-      "t0": 3.04,
-      "t1": 3.34,
-      "from_spoken": [
-       0
-      ],
-      "rr": "dogil"
-     },
-     {
-      "w": "잠수함은",
-      "t0": 3.38,
-      "t1": 4.18,
-      "from_spoken": [
-       1
-      ],
-      "rr": "jamsuhameun"
-     },
-     {
-      "w": "유보트라고",
-      "t0": 4.4,
-      "t1": 5.3,
-      "from_spoken": [
-       2
-      ],
-      "rr": "yuboteurago"
-     },
-     {
-      "w": "불렸다.",
-      "t0": 5.34,
-      "t1": 5.86,
-      "from_spoken": [
-       3
-      ],
-      "rr": "bullyeotda."
-     },
-     {
-      "w": "독일군은",
-      "t0": 6.68,
-      "t1": 7.36,
-      "from_spoken": [
-       4
-      ],
-      "rr": "dogilguneun"
-     },
-     {
-      "w": "잠수함을",
-      "t0": 7.46,
-      "t1": 8.22,
-      "from_spoken": [
-       5
-      ],
-      "rr": "jamsuhameul"
-     },
-     {
-      "w": "항해하고",
-      "t0": 8.24,
-      "t1": 8.86,
-      "from_spoken": [
-       6
-      ],
-      "rr": "hanghaehago"
-     },
-     {
-      "w": "운용하는데",
-      "t0": 9.1,
-      "t1": 9.8,
-      "from_spoken": [
-       7
-      ],
-      "rr": "unyonghaneunde"
-     },
-     {
-      "w": "아주",
-      "t0": 10.08,
-      "t1": 10.28,
-      "from_spoken": [
-       8
-      ],
-      "rr": "aju"
-     },
-     {
-      "w": "능했다",
-      "t0": 10.34,
-      "t1": 10.84,
-      "from_spoken": [
-       9
-      ],
-      "rr": "neunghaetda"
-     }
-    ],
-    "spoken": [
-     {
-      "w": "독일",
-      "t0": 3.04,
-      "t1": 3.34,
-      "rr": "dogil"
-     },
-     {
-      "w": "잠수함은",
-      "t0": 3.38,
-      "t1": 4.18,
-      "rr": "jamsuhameun"
-     },
-     {
-      "w": "유보트라고",
-      "t0": 4.4,
-      "t1": 5.3,
-      "rr": "yuboteurago"
-     },
-     {
-      "w": "불렸다.",
-      "t0": 5.34,
-      "t1": 5.86,
-      "rr": "bullyeotda."
-     },
-     {
-      "w": "독일군은",
-      "t0": 6.68,
-      "t1": 7.36,
-      "rr": "dogilguneun"
-     },
-     {
-      "w": "잠수함을",
-      "t0": 7.46,
-      "t1": 8.22,
-      "rr": "jamsuhameul"
-     },
-     {
-      "w": "항해하고",
-      "t0": 8.24,
-      "t1": 8.86,
-      "rr": "hanghaehago"
-     },
-     {
-      "w": "운용하는데",
-      "t0": 9.1,
-      "t1": 9.8,
-      "rr": "unyonghaneunde"
-     },
-     {
-      "w": "아주",
-      "t0": 10.08,
-      "t1": 10.28,
-      "rr": "aju"
-     },
-     {
-      "w": "능했다.",
-      "t0": 10.34,
-      "t1": 10.84,
-      "rr": "neunghaetda."
-     }
-    ]
-   },
-   "marks": {
-    "slot_marks": [
-     {
-      "slot": 0,
-      "type": "paren",
-      "span": "(U-Boat)",
-      "option": "drop",
-      "reading": "",
-      "default": "",
-      "decision": "omitted",
-      "t0": 4.94,
-      "t1": 5.06
-     }
-    ]
-   },
-   "highlights": [
-    {
-     "start": 11,
-     "end": 17,
-     "type": "omission",
-     "label": "not spoken",
-     "default": "",
-     "t0": 4.94,
-     "t1": 5.06,
-     "from": "paren slot"
-    }
-   ]
-  },
   "11800040547070956694": {
    "id": "11800040547070956694",
    "file": "11800040547070956694.wav",
@@ -832,6 +535,20 @@
     "whisper-large-v3": "Whisper large-v3",
     "whisper-large-v3-turbo": "Whisper large-v3-turbo",
     "w2v2-ko": "Korean wav2vec 2.0"
+   },
+   "reliability": {
+    "whisper-large-v3-turbo": {
+     "e": 2,
+     "N": 117,
+     "rate": 0.0171,
+     "marks": null
+    },
+    "whisper-large-v3": {
+     "e": 1,
+     "N": 117,
+     "rate": 0.0085,
+     "marks": null
+    }
    },
    "words": {
     "refined": [
@@ -1207,6 +924,310 @@
     }
    ]
   },
+  "13564194454706287497": {
+   "id": "13564194454706287497",
+   "file": "13564194454706287497.wav",
+   "split": "test",
+   "speaker": "male",
+   "sentence_id": 1994,
+   "duration": 11.08,
+   "sample_rate": 24000,
+   "in_eval_189": true,
+   "audio": "static/audio/13564194454706287497.mp3",
+   "spectrogram": "static/spectrograms/13564194454706287497.png",
+   "spectrogram_px": [
+    2216,
+    256
+   ],
+   "audio_check": {
+    "wav_samples": 265920,
+    "mp3_decoded_samples": 265920,
+    "equal": true
+   },
+   "text": {
+    "raw_transcription": {
+     "ko": "당연한 말이지만 당신이 로맨스어를 안다면 포르투갈어를 배우는 것이 쉬울 것입니다.",
+     "rr": "dangyeonhan marijiman dangsini romaenseueoreul andamyeon poreutugareoreul baeuneun geosi swiul geosimnida."
+    },
+    "transcription": {
+     "ko": "당연한 말이지만 당신이 로맨스어를 안다면 포르투갈어를 배우는 것이 쉬울 것입니다",
+     "rr": "dangyeonhan marijiman dangsini romaenseueoreul andamyeon poreutugareoreul baeuneun geosi swiul geosimnida"
+    },
+    "refined_text": {
+     "ko": "당연한 말이지만 당신이 로맨스어를 안다면 포르투갈어를 배우는 것이 쉬울 것입니다",
+     "rr": "dangyeonhan marijiman dangsini romaenseueoreul andamyeon poreutugareoreul baeuneun geosi swiul geosimnida"
+    },
+    "spoken_text": {
+     "ko": "당연한 말이지만 당신이 로맨스어를 안다면 포르투갈어를 배우는 것이 쉬울 것입니다.",
+     "rr": "dangyeonhan marijiman dangsini romaenseueoreul andamyeon poreutugareoreul baeuneun geosi swiul geosimnida."
+    },
+    "remove_all": {
+     "ko": "당연한 말이지만 당신이 로맨스어를 안다면 포르투갈어를 배우는 것이 쉬울 것입니다.",
+     "rr": "dangyeonhan marijiman dangsini romaenseueoreul andamyeon poreutugareoreul baeuneun geosi swiul geosimnida."
+    },
+    "whisper_large_v3": {
+     "ko": "당연한 말이지만 당신이 로맨스어를 안다면 포르투갈어를 배우는 것이 쉬울 것입니다",
+     "rr": "dangyeonhan marijiman dangsini romaenseueoreul andamyeon poreutugareoreul baeuneun geosi swiul geosimnida"
+    }
+   },
+   "hypotheses": {
+    "whisper-large-v3": {
+     "ko": "당연한 말이지만 당신이 로맨스어를 안다면 포르투갈어를 배우는 것이 쉬울 것입니다",
+     "rr": "dangyeonhan marijiman dangsini romaenseueoreul andamyeon poreutugareoreul baeuneun geosi swiul geosimnida"
+    },
+    "whisper-large-v3-turbo": {
+     "ko": "당연한 말이지만 당신이 로맨스어를 안다면 포르투갈어를 배우는 것이 쉬울 것입니다.",
+     "rr": "dangyeonhan marijiman dangsini romaenseueoreul andamyeon poreutugareoreul baeuneun geosi swiul geosimnida."
+    },
+    "w2v2-ko": {
+     "ko": "당면한말이지만당신이로멘스를한다면포르트가루를배우는것이키울것입니다",
+     "rr": "dangmyeonhanmarijimandangsiniromenseureulhandamyeonporeuteugarureulbaeuneungeosikiulgeosimnida"
+    }
+   },
+   "meaning_en": {
+    "text": "Needless to say, if you know a Romance language, it will be easier for you to learn Portuguese.",
+    "source": "fleurs en_us (70bb2e8), id 1994"
+   },
+   "reliability_score": 0.0,
+   "min_gop": -0.53,
+   "slots": [],
+   "evidence_models": {
+    "whisper-large-v3": "Whisper large-v3",
+    "whisper-large-v3-turbo": "Whisper large-v3-turbo",
+    "w2v2-ko": "Korean wav2vec 2.0"
+   },
+   "reliability": {
+    "whisper-large-v3-turbo": {
+     "e": 0,
+     "N": 73,
+     "rate": 0.0,
+     "marks": []
+    },
+    "whisper-large-v3": {
+     "e": 0,
+     "N": 73,
+     "rate": 0.0,
+     "marks": []
+    }
+   },
+   "words": {
+    "refined": [
+     {
+      "w": "당연한",
+      "t0": 2.08,
+      "t1": 2.52,
+      "from_spoken": [
+       0
+      ],
+      "rr": "dangyeonhan"
+     },
+     {
+      "w": "말이지만",
+      "t0": 2.58,
+      "t1": 3.08,
+      "from_spoken": [
+       1
+      ],
+      "rr": "marijiman"
+     },
+     {
+      "w": "당신이",
+      "t0": 3.64,
+      "t1": 4.12,
+      "from_spoken": [
+       2
+      ],
+      "rr": "dangsini"
+     },
+     {
+      "w": "로맨스어를",
+      "t0": 4.2,
+      "t1": 4.88,
+      "from_spoken": [
+       3
+      ],
+      "rr": "romaenseueoreul"
+     },
+     {
+      "w": "안다면",
+      "t0": 4.9,
+      "t1": 5.32,
+      "from_spoken": [
+       4
+      ],
+      "rr": "andamyeon"
+     },
+     {
+      "w": "포르투갈어를",
+      "t0": 5.72,
+      "t1": 6.56,
+      "from_spoken": [
+       5
+      ],
+      "rr": "poreutugareoreul"
+     },
+     {
+      "w": "배우는",
+      "t0": 6.62,
+      "t1": 6.96,
+      "from_spoken": [
+       6
+      ],
+      "rr": "baeuneun"
+     },
+     {
+      "w": "것이",
+      "t0": 7.02,
+      "t1": 7.24,
+      "from_spoken": [
+       7
+      ],
+      "rr": "geosi"
+     },
+     {
+      "w": "쉬울",
+      "t0": 7.38,
+      "t1": 7.64,
+      "from_spoken": [
+       8
+      ],
+      "rr": "swiul"
+     },
+     {
+      "w": "것입니다",
+      "t0": 7.74,
+      "t1": 8.26,
+      "from_spoken": [
+       9
+      ],
+      "rr": "geosimnida"
+     }
+    ],
+    "spoken": [
+     {
+      "w": "당연한",
+      "t0": 2.08,
+      "t1": 2.52,
+      "rr": "dangyeonhan"
+     },
+     {
+      "w": "말이지만",
+      "t0": 2.58,
+      "t1": 3.08,
+      "rr": "marijiman"
+     },
+     {
+      "w": "당신이",
+      "t0": 3.64,
+      "t1": 4.12,
+      "rr": "dangsini"
+     },
+     {
+      "w": "로맨스어를",
+      "t0": 4.2,
+      "t1": 4.88,
+      "rr": "romaenseueoreul"
+     },
+     {
+      "w": "안다면",
+      "t0": 4.9,
+      "t1": 5.32,
+      "rr": "andamyeon"
+     },
+     {
+      "w": "포르투갈어를",
+      "t0": 5.72,
+      "t1": 6.56,
+      "rr": "poreutugareoreul"
+     },
+     {
+      "w": "배우는",
+      "t0": 6.62,
+      "t1": 6.96,
+      "rr": "baeuneun"
+     },
+     {
+      "w": "것이",
+      "t0": 7.02,
+      "t1": 7.24,
+      "rr": "geosi"
+     },
+     {
+      "w": "쉬울",
+      "t0": 7.38,
+      "t1": 7.64,
+      "rr": "swiul"
+     },
+     {
+      "w": "것입니다.",
+      "t0": 7.74,
+      "t1": 8.26,
+      "rr": "geosimnida."
+     }
+    ]
+   },
+   "marks": {
+    "slot_marks": [],
+    "heard": {
+     "source": "human reference (text_spoken)",
+     "text": "당연한 말이지만 당신이 로맨스어를 안다면 포르투갈어를 배우는 것이 쉬울 것입니다",
+     "words": [
+      {
+       "w": "당연한",
+       "t0": 2.08,
+       "t1": 2.52
+      },
+      {
+       "w": "말이지만",
+       "t0": 2.58,
+       "t1": 3.08
+      },
+      {
+       "w": "당신이",
+       "t0": 3.64,
+       "t1": 4.12
+      },
+      {
+       "w": "로맨스어를",
+       "t0": 4.2,
+       "t1": 4.88
+      },
+      {
+       "w": "안다면",
+       "t0": 4.9,
+       "t1": 5.32
+      },
+      {
+       "w": "포르투갈어를",
+       "t0": 5.72,
+       "t1": 6.56
+      },
+      {
+       "w": "배우는",
+       "t0": 6.62,
+       "t1": 6.96
+      },
+      {
+       "w": "것이",
+       "t0": 7.02,
+       "t1": 7.24
+      },
+      {
+       "w": "쉬울",
+       "t0": 7.38,
+       "t1": 7.64
+      },
+      {
+       "w": "것입니다",
+       "t0": 7.74,
+       "t1": 8.26
+      }
+     ],
+     "regions": []
+    }
+   },
+   "highlights": []
+  },
   "14152602067612134390": {
    "id": "14152602067612134390",
    "file": "14152602067612134390.wav",
@@ -1320,6 +1341,20 @@
     "whisper-large-v3": "Whisper large-v3",
     "whisper-large-v3-turbo": "Whisper large-v3-turbo",
     "w2v2-ko": "Korean wav2vec 2.0"
+   },
+   "reliability": {
+    "whisper-large-v3-turbo": {
+     "e": 0,
+     "N": 85,
+     "rate": 0.0,
+     "marks": []
+    },
+    "whisper-large-v3": {
+     "e": 0,
+     "N": 85,
+     "rate": 0.0,
+     "marks": []
+    }
    },
    "words": {
     "refined": [
@@ -1559,327 +1594,6 @@
     }
    ]
   },
-  "14689351762998088074": {
-   "id": "14689351762998088074",
-   "file": "14689351762998088074.wav",
-   "split": "train",
-   "speaker": "female",
-   "sentence_id": 405,
-   "duration": 11.32,
-   "sample_rate": 24000,
-   "in_eval_189": false,
-   "audio": "static/audio/14689351762998088074.mp3",
-   "spectrogram": "static/spectrograms/14689351762998088074.png",
-   "spectrogram_px": [
-    2264,
-    256
-   ],
-   "audio_check": {
-    "wav_samples": 271680,
-    "mp3_decoded_samples": 271680,
-    "equal": true
-   },
-   "text": {
-    "raw_transcription": {
-     "ko": "독일 잠수함은 유보트(U-Boat)라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-     "rr": "dogil jamsuhameun yuboteu(U-Boat)rago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-    },
-    "transcription": {
-     "ko": "독일 잠수함은 유보트u-boat라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다",
-     "rr": "dogil jamsuhameun yuboteuu-boatrago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda"
-    },
-    "refined_text": {
-     "ko": "독일 잠수함은 유보트u-boat라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다",
-     "rr": "dogil jamsuhameun yuboteuu-boatrago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda"
-    },
-    "spoken_text": {
-     "ko": "독일 잠수함은 유보트 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-     "rr": "dogil jamsuhameun yuboteu yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-    },
-    "remove_all": {
-     "ko": "독일 잠수함은 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-     "rr": "dogil jamsuhameun yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-    },
-    "whisper_large_v3": {
-     "ko": "독일 잠수함은 유보트, 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-     "rr": "dogil jamsuhameun yuboteu, yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-    }
-   },
-   "hypotheses": {
-    "whisper-large-v3": {
-     "ko": "독일 잠수함은 유보트, 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-     "rr": "dogil jamsuhameun yuboteu, yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-    },
-    "whisper-large-v3-turbo": {
-     "ko": "독일 잠수함은 유보트 유보트 라고 불렸다 독일군은 잠수함을 항해하고 운용하는데 아주 능했다",
-     "rr": "dogil jamsuhameun yuboteu yuboteu rago bullyeotda dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda"
-    },
-    "w2v2-ko": {
-     "ko": "독일잠수함은유보트유복라고불렸다독일구는잠수함을항해하고운영하는데아주등었다",
-     "rr": "dogiljamsuhameunyuboteuyubongnagobullyeotdadogilguneunjamsuhameulhanghaehagounyeonghaneundeajudeungeotda"
-    }
-   },
-   "meaning_en": {
-    "text": "German submarines were called U-Boats. The Germans were very good at navigating and operating their submarines.",
-    "source": "fleurs-r en_us (c621c0b), id 405"
-   },
-   "reliability_score": 0.0,
-   "min_gop": -0.06,
-   "slots": [
-    {
-     "type": "paren",
-     "span": "(U-Boat)",
-     "options": [
-      {
-       "name": "drop",
-       "insert": "",
-       "candidate_spoken": "독일 잠수함은 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-       "distance": {
-        "whisper-large-v3-turbo": 5,
-        "whisper-large-v3": 5
-       },
-       "J": 5.0,
-       "ctc_ll": -23.69,
-       "insert_rr": "",
-       "candidate_spoken_rr": "dogil jamsuhameun yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-      },
-      {
-       "name": "read",
-       "insert": " U-Boat",
-       "candidate_spoken": "독일 잠수함은 유보트 U-Boat라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-       "distance": {
-        "whisper-large-v3-turbo": 2,
-        "whisper-large-v3": 2
-       },
-       "J": 2.0,
-       "ctc_ll": -15.26,
-       "insert_rr": "U-Boat",
-       "candidate_spoken_rr": "dogil jamsuhameun yuboteu U-Boatrago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-      },
-      {
-       "name": "repeat1",
-       "insert": " 유보트",
-       "candidate_spoken": "독일 잠수함은 유보트 유보트라고 불렸다. 독일군은 잠수함을 항해하고 운용하는데 아주 능했다.",
-       "distance": {
-        "whisper-large-v3-turbo": 0,
-        "whisper-large-v3": 0
-       },
-       "J": 0.0,
-       "ctc_ll": -6.78,
-       "insert_rr": "yuboteu",
-       "candidate_spoken_rr": "dogil jamsuhameun yuboteu yuboteurago bullyeotda. dogilguneun jamsuhameul hanghaehago unyonghaneunde aju neunghaetda."
-      }
-     ],
-     "evidence": [
-      "whisper-large-v3-turbo",
-      "whisper-large-v3"
-     ],
-     "chosen_by_J": 2,
-     "chosen": 2,
-     "source": "asr",
-     "margin": 5.0,
-     "ctc_margin": 16.91
-    }
-   ],
-   "evidence_models": {
-    "whisper-large-v3": "Whisper large-v3",
-    "whisper-large-v3-turbo": "Whisper large-v3-turbo",
-    "w2v2-ko": "Korean wav2vec 2.0"
-   },
-   "words": {
-    "refined": [
-     {
-      "w": "독일",
-      "t0": 1.46,
-      "t1": 1.8,
-      "from_spoken": [
-       0
-      ],
-      "rr": "dogil"
-     },
-     {
-      "w": "잠수함은",
-      "t0": 1.84,
-      "t1": 2.54,
-      "from_spoken": [
-       1
-      ],
-      "rr": "jamsuhameun"
-     },
-     {
-      "w": "유보트u-boat라고",
-      "t0": 2.78,
-      "t1": 5.0,
-      "from_spoken": [
-       2,
-       3
-      ],
-      "rr": "yuboteuu-boatrago"
-     },
-     {
-      "w": "불렸다.",
-      "t0": 5.08,
-      "t1": 5.56,
-      "from_spoken": [
-       4
-      ],
-      "rr": "bullyeotda."
-     },
-     {
-      "w": "독일군은",
-      "t0": 6.06,
-      "t1": 6.68,
-      "from_spoken": [
-       5
-      ],
-      "rr": "dogilguneun"
-     },
-     {
-      "w": "잠수함을",
-      "t0": 6.74,
-      "t1": 7.4,
-      "from_spoken": [
-       6
-      ],
-      "rr": "jamsuhameul"
-     },
-     {
-      "w": "항해하고",
-      "t0": 7.44,
-      "t1": 7.94,
-      "from_spoken": [
-       7
-      ],
-      "rr": "hanghaehago"
-     },
-     {
-      "w": "운용하는데",
-      "t0": 8.06,
-      "t1": 8.7,
-      "from_spoken": [
-       8
-      ],
-      "rr": "unyonghaneunde"
-     },
-     {
-      "w": "아주",
-      "t0": 8.88,
-      "t1": 9.1,
-      "from_spoken": [
-       9
-      ],
-      "rr": "aju"
-     },
-     {
-      "w": "능했다",
-      "t0": 9.16,
-      "t1": 9.64,
-      "from_spoken": [
-       10
-      ],
-      "rr": "neunghaetda"
-     }
-    ],
-    "spoken": [
-     {
-      "w": "독일",
-      "t0": 1.46,
-      "t1": 1.8,
-      "rr": "dogil"
-     },
-     {
-      "w": "잠수함은",
-      "t0": 1.84,
-      "t1": 2.54,
-      "rr": "jamsuhameun"
-     },
-     {
-      "w": "유보트",
-      "t0": 2.78,
-      "t1": 3.36,
-      "rr": "yuboteu"
-     },
-     {
-      "w": "유보트라고",
-      "t0": 3.9,
-      "t1": 5.0,
-      "rr": "yuboteurago"
-     },
-     {
-      "w": "불렸다.",
-      "t0": 5.08,
-      "t1": 5.56,
-      "rr": "bullyeotda."
-     },
-     {
-      "w": "독일군은",
-      "t0": 6.06,
-      "t1": 6.68,
-      "rr": "dogilguneun"
-     },
-     {
-      "w": "잠수함을",
-      "t0": 6.74,
-      "t1": 7.4,
-      "rr": "jamsuhameul"
-     },
-     {
-      "w": "항해하고",
-      "t0": 7.44,
-      "t1": 7.94,
-      "rr": "hanghaehago"
-     },
-     {
-      "w": "운용하는데",
-      "t0": 8.06,
-      "t1": 8.7,
-      "rr": "unyonghaneunde"
-     },
-     {
-      "w": "아주",
-      "t0": 8.88,
-      "t1": 9.1,
-      "rr": "aju"
-     },
-     {
-      "w": "능했다.",
-      "t0": 9.16,
-      "t1": 9.64,
-      "rr": "neunghaetda."
-     }
-    ]
-   },
-   "marks": {
-    "slot_marks": [
-     {
-      "slot": 0,
-      "type": "paren",
-      "span": "(U-Boat)",
-      "option": "repeat1",
-      "reading": "유보트",
-      "default": "",
-      "decision": "spoken",
-      "t0": 3.9,
-      "t1": 4.56,
-      "words": [
-       "유보트"
-      ]
-     }
-    ]
-   },
-   "highlights": [
-    {
-     "start": 11,
-     "end": 17,
-     "type": "repeat",
-     "label": "유보트",
-     "default": "",
-     "t0": 3.9,
-     "t1": 4.56,
-     "from": "paren slot"
-    }
-   ]
-  },
   "14945311428794587488": {
    "id": "14945311428794587488",
    "file": "14945311428794587488.wav",
@@ -1993,6 +1707,20 @@
     "whisper-large-v3": "Whisper large-v3",
     "whisper-large-v3-turbo": "Whisper large-v3-turbo",
     "w2v2-ko": "Korean wav2vec 2.0"
+   },
+   "reliability": {
+    "whisper-large-v3-turbo": {
+     "e": 0,
+     "N": 39,
+     "rate": 0.0,
+     "marks": []
+    },
+    "whisper-large-v3": {
+     "e": 0,
+     "N": 39,
+     "rate": 0.0,
+     "marks": []
+    }
    },
    "words": {
     "refined": [
@@ -2226,6 +1954,20 @@
     "whisper-large-v3": "Whisper large-v3",
     "whisper-large-v3-turbo": "Whisper large-v3-turbo",
     "w2v2-ko": "Korean wav2vec 2.0"
+   },
+   "reliability": {
+    "whisper-large-v3-turbo": {
+     "e": 1,
+     "N": 117,
+     "rate": 0.0085,
+     "marks": null
+    },
+    "whisper-large-v3": {
+     "e": 1,
+     "N": 117,
+     "rate": 0.0085,
+     "marks": null
+    }
    },
    "words": {
     "refined": [
@@ -2592,7 +2334,7 @@
     {
      "start": 17,
      "end": 19,
-     "type": "reading-default",
+     "type": "reading",
      "label": "스물다섯",
      "default": "스물다섯",
      "t0": 4.72,
@@ -2672,6 +2414,32 @@
     "whisper-large-v3": "Whisper large-v3",
     "whisper-large-v3-turbo": "Whisper large-v3-turbo",
     "w2v2-ko": "Korean wav2vec 2.0"
+   },
+   "reliability": {
+    "whisper-large-v3-turbo": {
+     "e": 5,
+     "N": 111,
+     "rate": 0.045,
+     "marks": [
+      {
+       "start": 35,
+       "end": 37,
+       "type": "substitution"
+      }
+     ]
+    },
+    "whisper-large-v3": {
+     "e": 6,
+     "N": 111,
+     "rate": 0.0541,
+     "marks": [
+      {
+       "start": 35,
+       "end": 37,
+       "type": "substitution"
+      }
+     ]
+    }
    },
    "words": {
     "refined": [
@@ -3139,6 +2907,32 @@
     "whisper-large-v3-turbo": "Whisper large-v3-turbo",
     "w2v2-ko": "Korean wav2vec 2.0"
    },
+   "reliability": {
+    "whisper-large-v3-turbo": {
+     "e": 3,
+     "N": 73,
+     "rate": 0.0411,
+     "marks": [
+      {
+       "start": 37,
+       "end": 39,
+       "type": "insertion"
+      }
+     ]
+    },
+    "whisper-large-v3": {
+     "e": 3,
+     "N": 73,
+     "rate": 0.0411,
+     "marks": [
+      {
+       "start": 37,
+       "end": 39,
+       "type": "insertion"
+      }
+     ]
+    }
+   },
    "words": {
     "refined": [
      {
@@ -3387,27 +3181,24 @@
  "examples": {
   "demos": [
    {
-    "key": "omission",
-    "group": "A",
+    "key": "parenthetical",
     "files": [
      "14945311428794587488.wav",
      "14152602067612134390.wav"
     ]
    },
    {
-    "key": "insertion",
-    "group": "I",
-    "files": [
-     "14689351762998088074.wav",
-     "10849776261913860801.wav"
-    ]
-   },
-   {
-    "key": "substitution",
-    "group": "S",
+    "key": "number",
     "files": [
      "11800040547070956694.wav",
      "1807970046287819091.wav"
+    ]
+   },
+   {
+    "key": "unpredictable",
+    "files": [
+     "987799419854082105.wav",
+     "13564194454706287497.wav"
     ]
    }
   ],
