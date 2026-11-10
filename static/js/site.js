@@ -123,6 +123,7 @@
     dlg.showModal();
     label();
     layoutLabels(copy);
+    reveal(copy);
     tick(audio);
   }
   function closeZoomContent() {
