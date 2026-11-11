@@ -162,7 +162,13 @@ figcaption.paper-cap .cap-num { font-weight: 700; margin-right: 0.3rem; }
 
 /* ------------------------------------------------------------ Fig. 1 recordings */
 .rec { margin: 0.4rem 0 1rem; min-width: 0; }
-.rec + .rec { border-top: 1px dashed var(--rule); padding-top: 0.8rem; }
+.rec + .rec { border-top: 1px dashed var(--rule); padding-top: 1.1rem; margin-top: 1.4rem; }
+/* mismatch type of each recording: the Fig. 1 panel title with its color */
+.content h3.rec-type { display: flex; align-items: center; gap: 0.5rem; font-size: 1.08rem; font-weight: 700; margin: 0.2rem 0 0.4rem; }
+.rec-type::before { content: ""; flex: none; width: 0.85rem; height: 0.85rem; border-radius: 3px; border: 2px solid; }
+.rec-type.omit::before { border-color: var(--omit); background: var(--omit-bg); border-style: dashed; }
+.rec-type.ins::before { border-color: var(--ins); background: var(--ins-bg); }
+.rec-type.sub::before { border-color: var(--sub); background: var(--sub-bg); }
 .rec-meta { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; margin-bottom: 0.35rem; font-size: 0.8rem; color: var(--muted); }
 .rec-meta .who { font-weight: 700; color: var(--fg); font-size: 0.86rem; }
 .pill { border: 1px solid var(--rule); border-radius: 999px; padding: 0 0.5rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
